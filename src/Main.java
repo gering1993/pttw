@@ -7,7 +7,7 @@ public class Main {
 
 		System.out.println("=== PTTW ===");
 		System.out.println("Bart³omiej Œwiderek");
-		System.out.println("Rafa³ Trojak \n");
+		System.out.println("Rafa³ Trojak ");
 		Reader myCoder = new Reader();
 		
 		ConfigInterpreter myConfig = new ConfigInterpreter(myCoder.ReadConfigFile());

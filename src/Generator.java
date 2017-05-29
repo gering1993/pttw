@@ -12,9 +12,9 @@ public class Generator {
 		register1.presentRegister();
 		register2.presentRegister();
 		
-		register2.generateRegisterCode();
+		register1.printRegisterCode();
+		register2.printRegisterCode();
+		
 	}
-	
-
 	
 }
