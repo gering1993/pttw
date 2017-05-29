@@ -89,4 +89,24 @@ public class Register {
 			return false;
 		}
 	}
+	
+	public int getRegisterSize(){
+		return size;
+	}
+	
+	public int[] getRegisterCode(){
+		return code;
+	}
+
+	public void roundShiftCode() {
+		int tmpValue = code[code.length-1];
+		for (int j=code.length-1;j>0;j--){
+			code[j]=code[j-1];
+		}
+		code[0] = tmpValue;
+	}
+	
+	public int getCodeLength(){
+		return codeTheoryLength;
+	}
 }

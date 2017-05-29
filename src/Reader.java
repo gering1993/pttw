@@ -9,7 +9,7 @@ public class Reader {
 	public String ReadConfigFile(){
 		String configLine="";
 		try {
-			BufferedReader in = new BufferedReader(new FileReader("C:/Users/Rafal/Desktop/config.txt"));
+			BufferedReader in = new BufferedReader(new FileReader("C:/GoldCoderConfig.txt"));
 			configLine = in.readLine();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
