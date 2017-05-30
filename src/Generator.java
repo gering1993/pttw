@@ -6,7 +6,6 @@ public class Generator {
 	
 	private Register register1;
 	private Register register2;
-	private int[][] arrayOfCodes;
 	private List<int[]> listOfCodes = new ArrayList<int[]>();
 	
 	public Generator(ConfigInterpreter configClass){
@@ -24,12 +23,12 @@ public class Generator {
 		listOfCodes.add(register1.getRegisterCode());
 		listOfCodes.add(register2.getRegisterCode());
 		for (int i=0;i<register1.getCodeLength();i++){
-			listOfCodes.add(getRegistersSum(register1,register2));
+			listOfCodes.add(getCodesXor(register1,register2));
 			register1.roundShiftCode();
 		}
 	}
 
-	private int[] getRegistersSum(Register registerA, Register registerB) {
+	private int[] getCodesXor(Register registerA, Register registerB) {
 		int[] sumRegister = new int[registerA.getCodeLength()];
 		for (int i=0;i<registerA.getCodeLength();i++){
 			sumRegister[i]=(registerA.getRegisterCode()[i]+registerB.getRegisterCode()[i])%2;
@@ -49,5 +48,10 @@ public class Generator {
 			System.out.println("");
 		}
 	}
+	
+	public List<int[]> getListOfAllCodes(){
+		return listOfCodes;
+	}
+	
 	
 }

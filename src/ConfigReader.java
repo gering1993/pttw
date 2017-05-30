@@ -4,12 +4,18 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Reader {
+public class ConfigReader {
+	
+	private String pathToFile;
+	
+	public ConfigReader(String path){
+		this.pathToFile = path;
+	}
 	
 	public String ReadConfigFile(){
 		String configLine="";
 		try {
-			BufferedReader in = new BufferedReader(new FileReader("C:/GoldCoderConfig.txt"));
+			BufferedReader in = new BufferedReader(new FileReader(pathToFile));
 			configLine = in.readLine();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -20,6 +26,7 @@ public class Reader {
 	}
 	
 
+	
 	
 
 }
