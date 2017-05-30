@@ -9,7 +9,7 @@ public class InputReader {
 	public InputReader(String path){
 		this.pathToFile = path;
 	}
-	
+
 	public int[] readInputFileToArray(){
 		
 		StringBuilder mySB = new StringBuilder();
