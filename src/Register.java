@@ -9,13 +9,22 @@ public class Register {
 	private int[] code;
 	private int codeTheoryLength;
 	private boolean codeML;
+	private int[] initialValues;
 	
-	public Register(int[] sequenceInput, int size){
+	public Register(int[] sequenceInput, int size, int[] dataPartFromInput){
 		this.sequence = sequenceInput;
 		this.values = new int[size];
 		this.size = size;
-		this.initialFill();
-		this.code = generateRegisterCode2();
+		//this.initialFill();
+		this.fillRegister(dataPartFromInput);
+		this.code = generateRegisterCode();
+	}
+	
+	private void fillRegister(int[] dataPartFromInput){
+		for (int i=0; i<dataPartFromInput.length;i++){
+			this.values[this.values.length-(i+1)] = dataPartFromInput[i];
+		}
+		this.initialValues = this.values;
 	}
 	
 	private void initialFill(){
@@ -37,7 +46,7 @@ public class Register {
 		System.out.println("\nCode theoretical length: "+this.codeTheoryLength);
 	}
 	
-	public int[] generateRegisterCode2(){
+	public int[] generateRegisterCode(){
 		codeTheoryLength = (int) (Math.pow(2,this.size)-1);
 		int[] code = new int[codeTheoryLength];
 		
@@ -47,6 +56,7 @@ public class Register {
 			code[i] = values[values.length-1];			//"wyrzuca" ostatni bit i zapisuje w tablicy z wygenerowanym kodem
 			this.shiftRegister();						//przesuwa rejestr w prawo
 			values[0]=newFirstBit;						//wstawia nowy bit na pierwsze miejsce
+			//System.out.println("bp");
 		} 
 		this.codeML=isRegisterInInintialState();
 		codeML=isRegisterInInintialState();
@@ -83,11 +93,13 @@ public class Register {
 	}
 	
 	private boolean isRegisterInInintialState(){
-		if(values[0]==1 && IntStream.of(values).sum()==1){
-			return true;
-		}else{
-			return false;
-		}
+//		if(values[0]==1 && IntStream.of(values).sum()==1){
+//			return true;
+//		}else{
+//			return false;
+//		}
+		return compareArrays(values, initialValues);
+		
 	}
 	
 	public int getRegisterSize(){
@@ -109,4 +121,22 @@ public class Register {
 	public int getCodeLength(){
 		return codeTheoryLength;
 	}
+	
+
+	private boolean compareArrays(int[] array1, int[] array2) {
+        boolean b = true;
+        if (array1 != null && array2 != null){
+          if (array1.length != array2.length)
+              b = false;
+          else
+              for (int i = 0; i < array2.length; i++) {
+                  if (array2[i] != array1[i]) {
+                      b = false;    
+                  }                 
+            }
+        }else{
+          b = false;
+        }
+        return b;
+    }
 }

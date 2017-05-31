@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,9 +10,9 @@ public class Generator {
 	private Register register2;
 	private List<int[]> listOfCodes = new ArrayList<int[]>();
 	
-	public Generator(ConfigInterpreter configClass){
-		register1 = new Register(configClass.getRegister1Sequence(), configClass.getRegisterLength());
-		register2 = new Register(configClass.getRegister2Sequence(), configClass.getRegisterLength());
+	public Generator(ConfigInterpreter configClass, int[] dataPartFromInput){
+		register1 = new Register(configClass.getRegister1Sequence(), configClass.getRegisterLength(), dataPartFromInput);
+		register2 = new Register(configClass.getRegister2Sequence(), configClass.getRegisterLength(), dataPartFromInput);
 		
 		register1.presentRegister();
 		register2.presentRegister();
@@ -51,6 +53,21 @@ public class Generator {
 	
 	public List<int[]> getListOfAllCodes(){
 		return listOfCodes;
+	}
+	
+	public void saveFirstCodeToFile(String nameSuffix, String filePath){
+		try {
+			PrintWriter out = new PrintWriter(filePath);
+			int[] firstCode = listOfCodes.get(0);
+			for (int i=0;i<firstCode.length;i++){
+				out.println(Integer.toString(firstCode[i]));
+			}
+			out.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+
 	}
 	
 	
